@@ -28,11 +28,25 @@ function mostrarProductos($productos) {
         $result .= "Nombre: " . $producto['nombre'] . 
         ", cantidad: " . $producto['cantidad'] . 
         "valor: " . $producto['valor'] .
-        "modelo: " . $producto['modelo'] ."<br>";
+        "modelo: " . $producto['modelo'] 
+    ."<br>";
         
    
     }
     return $result;
+}
+
+function actualizarProducto($productos, $cantidad, $valor, $modelo) {
+    foreach ($productos as &$producto) {
+        if ($producto['nombre'] == $nombre;){
+            $producto['cantidad'] = $cantidad;
+            $producto['valor'] = $valor;
+            $producto['modelo'] = $modelo
+          
+            break;
+        }
+    }
+    return $usuarios;
 }
 
 
