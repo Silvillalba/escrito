@@ -36,12 +36,12 @@ function mostrarProductos($productos) {
     return $result;
 }
 
-function actualizarProducto($productos, $cantidad, $valor, $modelo) {
+function actualizarProducto( $productos, $nombre, $cantidad, $valor, $modelo) {
     foreach ($productos as &$producto) {
-        if ($producto['nombre'] == $nombre;){
+        if ($producto['nombre'] == $nombre) {
             $producto['cantidad'] = $cantidad;
             $producto['valor'] = $valor;
-            $producto['modelo'] = $modelo
+            $producto['modelo'] = $modelo;
           
             break;
         }
@@ -49,6 +49,17 @@ function actualizarProducto($productos, $cantidad, $valor, $modelo) {
     return $usuarios;
 }
 
+function calcularProductos($productos) {
+    $result = '';
+    foreach ($productos as $producto) {
+        $result .= 
+        "valor: " . $producto['valor'] .
+    "<br>";
+        
+   
+    }
+    return $result;
+}
 
 
 
@@ -73,5 +84,14 @@ $productoEncontrado = buscarProductoPorModelo($productos, $modeloABuscar);
 // Mostrar el resultado de la búsqueda
 echo $productoEncontrado;
 
+
+// Agregar algunos productos de ejemplo (igual que en el ejemplo anterior)
+$productos = agregarProducto("Laptop", 1, 500, "X123");
+$productos = agregarProducto("Celular", 2, 200, "Y987");
+$productos = agregarProducto("Tablet", 1, 350, "Z345");
+
+// Mostrar los productos utilizando la función mostrarProductos
+$productosHTML = mostrarProductos($productos);
+echo $productosHTML;
 
 ?>
