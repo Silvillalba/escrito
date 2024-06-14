@@ -81,8 +81,21 @@ function filtrarProductoPorValorMayor($productos, $valorMinimo) {
     return $modelosDisponibles;
   }
   
+  function calcularValorPromedio($productos) {
+    $totalValor = 0;
+    $cantidadProductos = count($productos);
+    if ($cantidadProductos > 0) {
+      foreach ($productos as $producto) {
+        $totalValor += $producto['valor'];
+      }
+      return $totalValor / $cantidadProductos;
+    } else {
+      return 0; 
+    }
+  }
+  
 
-
+  
 
 
 
@@ -99,6 +112,7 @@ $productos = agregarProducto("Tablet", 1, 350, "Z345");
 echo "<pre>";
 print_r($productos);
 echo "</pre>";
+
 
 
 // Buscar un producto por modelo específico
@@ -129,7 +143,7 @@ print_r($modelosDisponibles);
 
 // Calcular valor promedio
 $valorPromedio = calcularValorPromedio($productos);
-echo "Valor promedio: $" . $valorPromedio;
+echo " <br> Valor promedio: $ " . $valorPromedio;
 
 // Limpiar resultados
 limpiarResultados();
