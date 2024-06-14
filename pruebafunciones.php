@@ -62,6 +62,15 @@ function calcularProductos($productos) {
 }
 
 
+function filtrarProductoPorValor($productos, $valor) {
+    foreach ($productos as $producto) {
+        if ($producto['valor'] == $valor) {
+            return "Nombre: " . $producto['valor'] . "<br>";
+        }
+    }
+    return "Producto no encontrado.<br>";
+}
+
 
 
 
@@ -93,5 +102,10 @@ $productos = agregarProducto("Tablet", 1, 350, "Z345");
 // Mostrar los productos utilizando la función mostrarProductos
 $productosHTML = mostrarProductos($productos);
 echo $productosHTML;
+
+// Calcular y mostrar el resultado
+$productosHTML = calcularProductos($productos);
+echo $productosHTML;
+
 
 ?>
