@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Definir las funciones
 // Agregar funciones
 function agregarProducto($nombre, $cantidad, $valor, $modelo) {
     $producto[] = [
@@ -27,8 +26,8 @@ function mostrarProductos($productos) {
     foreach ($productos as $producto) {
         $result .= "Nombre: " . $producto['nombre'] . 
         ", cantidad: " . $producto['cantidad'] . 
-        "valor: " . $producto['valor'] .
-        "modelo: " . $producto['modelo'] 
+        ", valor: " . $producto['valor'] .
+        ", modelo: " . $producto['modelo'] 
     ."<br>";
         
    
@@ -40,13 +39,13 @@ function actualizarProducto( $productos, $nombre, $cantidad, $valor, $modelo) {
     foreach ($productos as &$producto) {
         if ($producto['nombre'] == $nombre) {
             $producto['cantidad'] = $cantidad;
-            $producto['valor'] = $valor;
+            $producto['valor'] = (float)$valor;
             $producto['modelo'] = $modelo;
           
             break;
         }
     }
-    return $usuarios;
+    return $productos;
 }
 
 function calcularProductos($productos) {
@@ -62,14 +61,30 @@ function calcularProductos($productos) {
 }
 
 
-function filtrarProductoPorValor($productos, $valor) {
+function filtrarProductoPorValorMayor($productos, $valorMinimo) {
+    $productosFiltrados = [];
     foreach ($productos as $producto) {
-        if ($producto['valor'] == $valor) {
-            return "Nombre: " . $producto['valor'] . "<br>";
-        }
+      if ($producto['valor'] > $valorMinimo) {
+        $productosFiltrados[] = $producto;
+      }
     }
-    return "Producto no encontrado.<br>";
-}
+    return $productosFiltrados;
+  }
+  
+  function listarModelosDisponibles($productos) {
+    $modelosDisponibles = [];
+    foreach ($productos as $producto) {
+      if (!in_array($producto['modelo'], $modelosDisponibles)) {
+        $modelosDisponibles[] = $producto['modelo'];
+      }
+    }
+    return $modelosDisponibles;
+  }
+  
+
+
+
+
 
 
 
@@ -94,11 +109,6 @@ $productoEncontrado = buscarProductoPorModelo($productos, $modeloABuscar);
 echo $productoEncontrado;
 
 
-// Agregar algunos productos de ejemplo (igual que en el ejemplo anterior)
-$productos = agregarProducto("Laptop", 1, 500, "X123");
-$productos = agregarProducto("Celular", 2, 200, "Y987");
-$productos = agregarProducto("Tablet", 1, 350, "Z345");
-
 // Mostrar los productos utilizando la función mostrarProductos
 $productosHTML = mostrarProductos($productos);
 echo $productosHTML;
@@ -107,5 +117,20 @@ echo $productosHTML;
 $productosHTML = calcularProductos($productos);
 echo $productosHTML;
 
+// Filtrar productos por valor mayor que 300
+$productosFiltrados = filtrarProductoPorValorMayor($productos, 300);
+echo "Productos con valor mayor a 300:<br>";
+echo mostrarProductos($productosFiltrados);
 
-?>
+// Listar modelos disponibles
+$modelosDisponibles = listarModelosDisponibles($productos);
+echo "Modelos disponibles:<br>";
+print_r($modelosDisponibles);
+
+// Calcular valor promedio
+$valorPromedio = calcularValorPromedio($productos);
+echo "Valor promedio: $" . $valorPromedio;
+
+// Limpiar resultados
+limpiarResultados();
+echo "<br>Resultados limpiados.";
