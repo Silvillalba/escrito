@@ -6,39 +6,97 @@ function agregarProducto($nombre, $cantidad, $valor, $modelo) {
     $producto[] = [
         'nombre' => $nombre,
         'cantidad' => $cantidad,
-        'valor' => $valor
+        'valor' => $valor,
+        'modelo' => $modelo
     ];
-    return $usuarios;
+    return $producto;
 }
 
-function buscarUsuarioPorEmail($usuarios, $email) {
-    foreach ($usuarios as $usuario) {
-        if ($usuario['email'] == $email) {
-            return "Nombre: " . $usuario['nombre'] . "<br>";
+function buscarProductoPorModelo($productos, $modelo) {
+    foreach ($productos as $producto) {
+        if ($producto['modelo'] == $modelo) {
+            return "Nombre: " . $producto['modelo'] . "<br>";
         }
     }
-    return "Email no encontrado.<br>";
+    return "Producto no encontrado.<br>";
 }
 
-function mostrarUsuarios($usuarios) {
+function mostrarProductos($productos) {
     $result = '';
-    foreach ($usuarios as $usuario) {
-        $result .= "Nombre: " . $usuario['nombre'] . ", Edad: " . $usuario['edad'] . "<br>";
+    foreach ($productos as $producto) {
+        $result .= "Nombre: " . $producto['nombre'] . 
+        ", cantidad: " . $producto['cantidad'] . 
+        ", valor: " . $producto['valor'] .
+        ", modelo: " . $producto['modelo'] 
+    ."<br>";
         
    
     }
     return $result;
 }
 
-function actualizarUsuario($usuarios, $email, $nombre, $edad) {
-    foreach ($usuarios as &$usuario) {
-        if ($usuario['email'] == $email) {
-            $usuario['nombre'] = $nombre;
-            $usuario['edad'] = $edad;
+function actualizarProducto( $productos, $nombre, $cantidad, $valor, $modelo) {
+    foreach ($productos as &$producto) {
+        if ($producto['nombre'] == $nombre) {
+            $producto['cantidad'] = $cantidad;
+            $producto['valor'] = (float)$valor;
+            $producto['modelo'] = $modelo;
+          
             break;
         }
     }
-    return $usuarios;
+    return $productos;
+}
+
+function calcularProductos($productos) {
+    $result = '';
+    foreach ($productos as $producto) {
+        $result .= 
+        "valor: " . $producto['valor'] .
+    "<br>";
+        
+   
+    }
+    return $result;
+}
+
+
+function filtrarProductoPorValorMayor($productos, $valorMinimo) {
+    $productosFiltrados = [];
+    foreach ($productos as $producto) {
+      if ($producto['valor'] > $valorMinimo) {
+        $productosFiltrados[] = $producto;
+      }
+    }
+    return $productosFiltrados;
+  }
+  
+  function listarModelosDisponibles($productos) {
+    $modelosDisponibles = [];
+    foreach ($productos as $producto) {
+      if (!in_array($producto['modelo'], $modelosDisponibles)) {
+        $modelosDisponibles[] = $producto['modelo'];
+      }
+    }
+    return $modelosDisponibles;
+  }
+  
+  function calcularValorPromedio($productos) {
+    $totalValor = 0;
+    $cantidadProductos = count($productos);
+    if ($cantidadProductos > 0) {
+      foreach ($productos as $producto) {
+        $totalValor += $producto['valor'];
+      }
+      return $totalValor / $cantidadProductos;
+    } else {
+      return 0; 
+    }
+  }
+  
+function limpiarResultados() {
+  global $productos; 
+  $productos = []; 
 }
 
 // Inicializar el array de usuarios en la sesión

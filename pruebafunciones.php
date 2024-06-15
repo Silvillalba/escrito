@@ -94,11 +94,11 @@ function filtrarProductoPorValorMayor($productos, $valorMinimo) {
     }
   }
   
-  function limpiarResultados() {
-    global $productos; 
-    $productos = []; 
-  }
-  
+function limpiarResultados() {
+  global $productos; 
+  $productos = []; 
+}
+
 
 
 
