@@ -11,19 +11,22 @@ if (isset($_SESSION['resultado'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Usuarios</title>
+    <title>Gestión de Productos</title>
 </head>
 <body>
     <form action="procesamiento.php" method="POST">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre"><br>
+      
+        <label for="cantidad">cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad"><br>
         
-        <label for="edad">Edad:</label>
-        <input type="number" id="edad" name="edad"><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br>
-        
+        <label for="valor">valor:</label>
+        <input type="valor" id="valor" name="valor"><br>
+       
+        <label for="modelo">modelo:</label>
+        <input type="modelo" id="modelo" name="modelo"><br>
+
         <input type="radio" id="agregar" name="accion" value="agregar">
         <label for="agregar">Agregar</label><br>
         

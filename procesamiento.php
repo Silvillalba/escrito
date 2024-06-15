@@ -100,28 +100,35 @@ function limpiarResultados() {
 }
 
 // Inicializar el array de usuarios en la sesión
-if (!isset($_SESSION['usuarios'])) {
-    $_SESSION['usuarios'] = [];
+if (!isset($_SESSION['productos'])) {
+    $_SESSION['productos'] = [];
 }
 
-$usuarios = $_SESSION['usuarios'];
+$productos = $_SESSION['productos'];
 $resultado = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $accion = $_POST['accion'];
     $nombre = $_POST['nombre'] ?? '';
-    $edad = $_POST['edad'] ?? '';
-    $email = $_POST['email'] ?? '';
-
+    $cantidad = $_POST['cantidad'] ?? '';
+    $valor = $_POST['valor'] ?? '';
+    $modelo = $_POST['modelo'] ?? ''; 
     switch ($accion) {
         case 'agregar':
-            $usuarios = agregarUsuario($usuarios, $nombre, $edad, $email);
+            $usuarios = agregarProducto($productos, $nombre, $cantidad, $valor, $modelo);
             $resultado = "Usuario agregado correctamente.<br>";
             break;
         
         case 'buscar':
-            $resultado = buscarUsuarioPorEmail($usuarios, $email);
+            $resultado = buscarUsuarioPorNombre($productos, $nombre);
             break;
+            $resultado = buscarUsuarioPorCantida($productos, $cantidad);
+            break;
+            $resultado = buscarUsuarioPorValor($productos, $valor,);
+            break;
+            $resultado = buscarUsuarioPorModelo($productos, $modelo);
+            break;
+
         
         case 'mostrar':
             $resultado = mostrarUsuarios($usuarios);
@@ -131,6 +138,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuarios = actualizarUsuario($usuarios, $email, $nombre, $edad);
             $resultado = "Usuario actualizado correctamente.<br>";
             break;
+
+       
+
+// Mostrar los productos utilizando la función mostrarProductos
+$productosHTML = mostrarProductos($productos);
+echo $productosHTML;
+
+// Calcular y mostrar el resultado
+$productosHTML = calcularProductos($productos);
+echo $productosHTML;
+
+// Filtrar productos por valor mayor que 300
+$productosFiltrados = filtrarProductoPorValorMayor($productos, 300);
+echo "Productos con valor mayor a 300:<br>";
+echo mostrarProductos($productosFiltrados);
+
+// Listar modelos disponibles
+$modelosDisponibles = listarModelosDisponibles($productos);
+echo "Modelos disponibles:<br>";
+print_r($modelosDisponibles);
+
+// Calcular valor promedio
+$valorPromedio = calcularValorPromedio($productos);
+echo " <br> Valor promedio: $ " . $valorPromedio;
 
         case 'limpiar':
             $_SESSION['usuarios'] = [];

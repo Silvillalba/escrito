@@ -35,7 +35,7 @@ function mostrarProductos($productos) {
     return $result;
 }
 
-function actualizarProducto( $productos, $nombre, $cantidad, $valor, $modelo) {
+function actualizarProducto( &$productos, $nombre, $cantidad, $valor, $modelo) {
     foreach ($productos as &$producto) {
         if ($producto['nombre'] == $nombre) {
             $producto['cantidad'] = $cantidad;
@@ -115,7 +115,6 @@ $productos = agregarProducto("Tablet", 1, 350, "Z345");
 echo "<pre>";
 print_r($productos);
 echo "</pre>";
-
 
 
 // Buscar un producto por modelo específico
