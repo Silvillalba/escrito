@@ -131,11 +131,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         case 'mostrar':
-            $resultado = mostrarUsuarios($usuarios);
+            $resultado = mostrarProductos($productos);
             break;
         
         case 'actualizar':
-            $usuarios = actualizarUsuario($usuarios, $email, $nombre, $edad);
+            $productos = actualizarUsuario($productos, $nombre, $cantidad, $valor, $modelo);
             $resultado = "Usuario actualizado correctamente.<br>";
             break;
 
